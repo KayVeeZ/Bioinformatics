@@ -24,13 +24,14 @@ def takeCommand():
             return query
         except Exception as e:
             return 'Some Error Occurred. Sorry'
+
 # TODO: generate own ai and use it with this program to fully automate
 if __name__ == '__main__':
-    print('PyCharm')
-    say('Hello I am Jarvis A.I.')
+    print('Welcome')
+    say('Hello, I am Alfred, how may I help?')
     while True:
         print('Listening...')
-        q1 = htakeCommand()
+        q1 = takeCommand()
         query1= q1.lower()
         # TODO: automate listening for sites
         sites = [['youtube', 'https://youtube.com'],['google', 'https://google.com'],['wikipedia', 'https://wikipedia.com'],['facebook', 'https://facebook.com'],]
@@ -40,17 +41,27 @@ if __name__ == '__main__':
                 say(f'Opening {site[0]} sir...')
                 webbrowser.open(site[1])
 
-        if 'open music' in query1:
+        if 'play music' in query1:
             # TODO: play any song
             musicPath = 'C:\songtest\song.mp3'
             os.system(f'{musicPath}')
 
         if 'the time' in query1:
-            strfTime = datetime.datetime.now().strftime('%H:%M:%S')
-            say(f'The time is {strfTime}')
+            hour = datetime.datetime.now().strftime('%H')
+            min = datetime.datetime.now().strftime('%M')
+            m=int(min)
+            h1=int(hour)
 
+            if h1>12:
+                h2=h1-12
+                say(f'The time is {h2} {m} pm')
+            elif h1==12 and  m==00:
+                say(f'It is 12 noon')
+            elif h1==12 and m!=00:
+                say(f'The time is {h1} {m} pm')
+            else:
+                say(f'The time is {h1} {m} am')
         
-
 
 
         if 'bye bye' in query1:
@@ -58,4 +69,3 @@ if __name__ == '__main__':
             break
 
 b = input('Press Enter to exit...')
-        # say(query)

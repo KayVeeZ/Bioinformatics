@@ -3,7 +3,7 @@ import pandas as pd
 
 print("A KayVeez lab program. Convert any csv file to excel...")
 b=input('Press Enter to start converting files...')
-files = os.listdir()
+files = os.listdir('csv_files')
 print('Checking if CSV files are present')
 i = 0
 for file in files:
@@ -17,10 +17,10 @@ if i>0:
         if file.endswith('.csv'):
             try:
                 # reading the csv file
-                cvsDataframe = pd.read_csv(file)
+                cvsDataframe = pd.read_csv(f'csv_files/{file}')
 
                 # creating an output excel file
-                resultExcelFile = pd.ExcelWriter(f'{file.removesuffix(".csv")}.xlsx')
+                resultExcelFile = pd.ExcelWriter(f'excel_files/{file.removesuffix(".csv")}.xlsx')
 
                 # converting the csv file to an excel file
                 cvsDataframe.to_excel(resultExcelFile, index=False)
@@ -28,7 +28,7 @@ if i>0:
                 # saving the excel file
                 resultExcelFile.save()
             except Exception as e:
-                print(f'Some error occurred. Please check this csv file {file}.')
+                print(f'Some error occurred. Please check this csv file --> {file}.')
                 continue
 else:
     print('No CSV file found. Please copy the program in a folder with CSV files and try again.')
